@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  gateway:
+    image: nginx:latest
+    ports: ["8080:80"]
+  frontend:
+    build: ./frontend
+  event-service:
+    build: ./event-service
+  booking-service:
+    build: ./booking-service
+  booking-worker:
+    build: ./booking-worker
+  postgres-db:
+    image: postgres:15
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports: ["5672:5672", "15672:15672"]
+  minio:
+    image: minio/minio
+    command: server /data
+    ports: ["9000:9000", "9001:9001"]
+    volumes: ["miniodata:/data"]
+  redis:
+    image: redis:alpine

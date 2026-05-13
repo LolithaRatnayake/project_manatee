@@ -2,6 +2,7 @@
 
 **Date:** 2026-05-07  
 **Status:** Accepted
+**ADR-ID:** 0003
 
 ## Context
 

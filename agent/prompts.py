@@ -11,9 +11,13 @@ Task:
 - Identify any "Drifts" (where the implementation violates or ignores an ADR).
 - Identify any "Missing Implementations" (where an ADR requires something not present in the compose file).
 
-Output Format:
-Provide a structured report listing:
-- Analyzed Components
-- Detected Drifts (with specific line references/service names and the violated ADR)
-- Recommendations for alignment.
+OUTPUT FORMAT INSTRUCTIONS:
+Your entire response must be in CSV format. Do not include any conversational text, markdown code blocks, or explanations. 
+
+The CSV must include the following headers:
+ADR-ID, Component, Issue_Description, Severity
+
+Example Output:
+0001,payment-service,DRIFTED,Uses REST instead of async events,High
+0003,MISSING,DRIFTED,Missing the implementation of conternization of every service,HIGH
 """

@@ -3,7 +3,7 @@ import sys
 import google.generativeai as genai
 
 from config import Config
-from file_reader import read_adrs, read_docker_compose
+from agent.file_operation import FileUtil
 from prompts import SYSTEM_INSTRUCTION
 
 
@@ -23,9 +23,11 @@ def analyze_system_drift(system_name: str):
     base_path = os.path.join(os.path.dirname(__file__), "..", "systems", system_name)
     
     print(f"[*] Scanning system: {system_name}")
+
+    system_scan = FileUtil(base_path)
     
-    adrs_content = read_adrs(base_path)
-    compose_content = read_docker_compose(base_path)
+    adrs_content = system_scan.read_adrs()
+    compose_content = system_scan.read_docker_compose()
     
     if "No ADRs" in adrs_content and "No docker-compose" in compose_content:
         print(f"[!] Target system '{system_name}' is missing both ADRs and docker-compose.yml.")
@@ -47,6 +49,7 @@ def analyze_system_drift(system_name: str):
     
     print("=== ARCHITECTURE DRIFT REPORT ===")
     print(response.text)
+    system_scan.record_drifts(response.text)
 
 if __name__ == "__main__":
     # Allow passing the system name as a command line argument

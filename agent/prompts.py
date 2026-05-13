@@ -15,9 +15,9 @@ OUTPUT FORMAT INSTRUCTIONS:
 Your entire response must be in CSV format. Do not include any conversational text, markdown code blocks, or explanations. 
 
 The CSV must include the following headers:
-ADR-ID, Component, Issue_Description, Severity
+ADR-ID, Component, Issue_Description
 
 Example Output:
-0001,payment-service,DRIFTED,Uses REST instead of async events,High
-0003,MISSING,DRIFTED,Missing the implementation of conternization of every service,HIGH
+0001,payment-service,Uses REST instead of async events
+0003,MISSING,Missing the implementation of localstack
 """

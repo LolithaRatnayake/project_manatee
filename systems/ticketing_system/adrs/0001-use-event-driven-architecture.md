@@ -1,7 +1,7 @@
 # 1. Use Event-Driven Architecture for Ticketing System
 
 **Date:** 2026-05-07  
-**Status:** Accepted
+**Status:** Accepted  
 **ADR-ID:** 0001
 
 ## Context
@@ -18,10 +18,10 @@ We will adopt an **Event-Driven Architecture (EDA)** as the foundational communi
 
 Specifically:
 
-1. **Asynchronous Communication:** Services will communicate state changes and commands via asynchronous message brokers rather than direct HTTP calls.
-2. **FIFO Queues:** For transactional operations requiring strict ordering and exactly-once processing (e.g., seat reservations and checkout processing), we will implement First-In-First-Out (FIFO) message queues.
-3. **Event Broadcasting:** For non-sequential reactions (e.g., sending an email confirmation or updating a read-optimized search cache after a successful booking), we will use a publish-subscribe (Pub/Sub) event bus model.
-4. **Local Development:** The `docker-compose.yml` will include containerized versions of the necessary message brokers (e.g., LocalStack for AWS SQS/SNS, or RabbitMQ/Kafka) to mirror the production cloud infrastructure locally.
+- **[REQ-0101] Asynchronous Communication:** Services will communicate state changes and commands via asynchronous message brokers rather than direct HTTP calls.
+- **[REQ-0102] FIFO Queues:** For transactional operations requiring strict ordering and exactly-once processing (e.g., seat reservations and checkout processing), we will implement First-In-First-Out (FIFO) message queues.
+- **[REQ-0103] Event Broadcasting:** For non-sequential reactions (e.g., sending an email confirmation or updating a read-optimized search cache after a successful booking), we will use a publish-subscribe (Pub/Sub) event bus model.
+- **[REQ-0104] Local Parity Verification:** The `docker-compose.yml` must include containerized versions of the necessary message brokers (e.g., LocalStack for AWS SQS/SNS, or RabbitMQ/Kafka) to mirror production cloud infrastructure locally.
 
 ## Consequences
 

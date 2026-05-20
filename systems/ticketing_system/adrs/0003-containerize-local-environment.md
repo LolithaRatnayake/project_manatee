@@ -1,7 +1,7 @@
 # 3. Containerize Local Development Environment
 
 **Date:** 2026-05-07  
-**Status:** Accepted
+**Status:** Accepted  
 **ADR-ID:** 0003
 
 ## Context
@@ -16,10 +16,10 @@ We will use **Docker and Docker Compose** as the primary vehicle for local devel
 
 Specifically:
 
-1. **Service Isolation:** Every microservice (Booking, Inventory, Payment, etc.) will have its own `Dockerfile` using a slim, production-parity base image.
-2. **Infrastructure Mocking:** We will use containerized versions of our cloud-native services. For example, using `localstack/localstack` to provide local SQS (FIFO), SNS, and S3 APIs.
-3. **Environment Parity:** The `docker-compose.yml` file will be the "source of truth" for the local system architecture. It must define networks, volumes, and environment variables consistent with our ADRs.
-4. **Agent Integration:** The Architecture Drift Agent (`project_manatee`) will use this `docker-compose.yml` as the definition of the "Actual State" to compare against the "Intended State" (ADRs).
+- **[REQ-0301] Microservice Isolation:** Every microservice (Booking, Inventory, Payment, etc.) will have its own explicit `Dockerfile` using a slim, production-parity base image.
+- **[REQ-0302] Containerized Infrastructure Mocking:** We will use containerized versions of our cloud-native services. For example, using `localstack/localstack` to provide local SQS (FIFO), SNS, and S3 APIs.
+- **[REQ-0303] Source of Truth Parity:** The `docker-compose.yml` file will be the "source of truth" for the local system architecture. It must explicitly define networks, volumes, and environment variables consistent with our ADRs.
+- **[REQ-0304] Drift Detection Integration:** The Architecture Drift Agent (`project_manatee`) will use this `docker-compose.yml` as the definition of the "Actual State" to compare against the "Intended State" (ADRs).
 
 ## Consequences
 

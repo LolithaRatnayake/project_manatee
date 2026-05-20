@@ -3,8 +3,9 @@ import sys
 import google.generativeai as genai
 
 from config import Config
-from agent.file_operation import FileUtil
+from file_operation import FileUtil
 from prompts import SYSTEM_INSTRUCTION
+from db_handler import insert_drift_report
 
 
 def initialize_agent():
@@ -50,6 +51,8 @@ def analyze_system_drift(system_name: str):
     print("=== ARCHITECTURE DRIFT REPORT ===")
     print(response.text)
     system_scan.record_drifts(response.text)
+
+    insert_drift_report('database.db', system_name, response.text)
 
 if __name__ == "__main__":
     # Allow passing the system name as a command line argument

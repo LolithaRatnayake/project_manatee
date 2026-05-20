@@ -1,7 +1,7 @@
 # 2. Implement FIFO Queues for Transactional Ordering
 
 **Date:** 2026-05-07  
-**Status:** Accepted
+**Status:** Accepted  
 **ADR-ID:** 0002
 
 ## Context
@@ -22,10 +22,10 @@ We will use **First-In-First-Out (FIFO) Queues** with exact-once processing capa
 
 Specifically:
 
-1. **Strict Ordering:** We will enforce strict ordering using FIFO queues.
-2. **Message Grouping:** To maintain high throughput while ensuring order, we will utilize `Message Group IDs`. Ordering will be strictly enforced _within_ a specific group (e.g., all messages pertaining to a specific `User_ID` or `Transaction_ID` will be processed in order), allowing messages from different groups to be processed in parallel.
-3. **Deduplication:** We will enforce exactly-once processing by utilizing a `Message Deduplication ID`. The broker will automatically discard duplicate messages sent within a 5-minute window, protecting against producer retry anomalies.
-4. **Local Implementation:** Our `docker-compose.yml` will simulate this behavior. If we are targeting AWS SQS FIFO for production, we will use LocalStack in our compose file to provide a local SQS API. Alternatively, if using RabbitMQ, we will configure queues with `x-single-active-consumer` and deduplication plugins to mimic FIFO behavior.
+- **[REQ-0201] Strict Message Ordering:** We will enforce strict ordering using FIFO queues for critical transactional pathways.
+- **[REQ-0202] Message Grouping Optimization:** To maintain high throughput while ensuring order, we will utilize `Message Group IDs`. Ordering will be strictly enforced _within_ a specific group (e.g., all messages pertaining to a specific `User_ID` or `Transaction_ID` will be processed in order), allowing messages from different groups to be processed in parallel.
+- **[REQ-0203] Message Deduplication:** We will enforce exactly-once processing by utilizing a `Message Deduplication ID`. The broker must automatically discard duplicate messages sent within a 5-minute window, protecting against producer retry anomalies.
+- **[REQ-0204] Local FIFO Simulation:** Our `docker-compose.yml` will simulate this behavior. If we are targeting AWS SQS FIFO for production, we will use LocalStack in our compose file to provide a local SQS API. Alternatively, if using RabbitMQ, we will configure queues with `x-single-active-consumer` and deduplication plugins to mimic FIFO behavior.
 
 ## Consequences
 
